@@ -29,22 +29,15 @@ onMounted(() => {
 
     <div v-else class="list-container">
       <div v-for="user in users" :key="user.id" class="card">
-        <div class="item">
-          <label>Nama</label>
-          <p class="name">{{ user.name }}</p>
-        </div>
-        
-        <div class="item">
-          <label>Email</label>
-          <p class="email">{{ user.email }}</p>
-        </div>
+        <p class="name">{{ user.name }}</p>
+        <p class="email">{{ user.email }}</p>
+        <a href="#" class="read-more">Read more &rarr;</a>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Background Full Layar Gelap */
 .container {
   background-color: #121212;
   min-height: 100vh;
@@ -62,46 +55,48 @@ h1 {
   text-align: center;
 }
 
-/* Container untuk membungkus kotak-kotak ke bawah */
 .list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Jarak antar kotak */
   max-width: 500px;
   margin: 0 auto;
+  border-top: 1px solid #333;
 }
 
-/* Desain Kotak (Card) */
 .card {
-  background-color: #1e1e1e;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #333;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
-
-.item {
-  margin-bottom: 10px;
-}
-
-.item label {
-  display: block;
-  font-size: 10px;
-  text-transform: uppercase;
-  color: #888;
-  font-weight: bold;
-  letter-spacing: 1px;
+  background-color: transparent;
+  padding: 30px 20px;
+  text-align: center;
+  
+  /* Hanya gunakan border samping dan bawah agar tidak double */
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  border-bottom: 1px solid #333;
+  
+  /* Menghilangkan margin agar kotak menempel */
+  margin-bottom: 0; 
 }
 
 .name {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 5px 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 5px 0;
 }
 
 .email {
-  color: #3b82f6; /* Warna biru untuk email */
+  color: #94a3b8;
+  font-size: 15px;
+  margin: 0 0 15px 0;
+}
+
+.read-more {
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
   font-size: 14px;
-  margin: 0;
+  font-weight: bold;
+}
+
+.read-more:hover {
+  text-decoration: underline;
 }
 </style>
