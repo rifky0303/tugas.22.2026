@@ -10,7 +10,7 @@ const fetchUsers = async () => {
     const data = await response.json()
     users.value = data
   } catch (error) {
-    console.log('Error:', error)
+    console.error('Error:', error)
   } finally {
     loading.value = false
   }
@@ -22,81 +22,65 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
-    <h1>Data Users</h1>
+  <div class="main-container py-5">
+    <div class="container">
+      <h1 class="text-center mb-5 title-data">Data User</h1>
 
-    <div v-if="loading" class="loading">Loading...</div>
+      <div v-if="loading" class="text-center">
+        <div class="spinner-border text-danger" role="status"></div>
+        <p>Loading...</p>
+      </div>
 
-    <div v-else class="list-container">
-      <div v-for="user in users" :key="user.id" class="card">
-        <p class="name">{{ user.name }}</p>
-        <p class="email">{{ user.email }}</p>
-        <a href="#" class="read-more">Read more &rarr;</a>
+      <div v-else class="row row-cols-1 row-cols-md-2 g-4">
+        <div v-for="user in users" :key="user.id" class="col">
+          
+          <div class="custom-card">
+            <h5 class="user-name">{{ user.name }}</h5>
+            <p class="user-email">{{ user.email }}</p>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
-  background-color: #121212;
+.main-container {
+  background-color: #f1f5f9; /* Warna background layar */
   min-height: 100vh;
-  padding: 40px 20px;
-  color: white;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.loading {
-  text-align: center;
-}
-
-.list-container {
-  max-width: 500px;
-  margin: 0 auto;
-  border-top: 1px solid #333;
-}
-
-.card {
-  background-color: transparent;
-  padding: 30px 20px;
-  text-align: center;
-  
-  /* Hanya gunakan border samping dan bawah agar tidak double */
-  border-left: 1px solid #333;
-  border-right: 1px solid #333;
-  border-bottom: 1px solid #333;
-  
-  /* Menghilangkan margin agar kotak menempel */
-  margin-bottom: 0; 
-}
-
-.name {
-  font-size: 22px;
-  font-weight: 600;
-  color: #e2e8f0;
-  margin: 0 0 5px 0;
-}
-
-.email {
-  color: #94a3b8;
-  font-size: 15px;
-  margin: 0 0 15px 0;
-}
-
-.read-more {
-  display: inline-block;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 14px;
+.title-data {
+  color: #475569;
   font-weight: bold;
 }
 
-.read-more:hover {
-  text-decoration: underline;
+/* Styling kartu agar mirip dengan gambar yang kamu kirim */
+.custom-card {
+  background-color: white;
+  border: 2px solid #fbcfe8; /* Border Pink Muda */
+  border-radius: 15px;       /* Membuat sudut melengkung */
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.custom-card:hover {
+  border-color: #f472b6; /* Pink lebih gelap saat di-hover */
+  transform: translateY(-2px);
+}
+
+.user-name {
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 5px;
+}
+
+.user-email {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 0;
 }
 </style>
